@@ -3,6 +3,7 @@ import '../styles/Main.css'
 import dropdown from '../assets/icons/dropdown.svg'
 import Dropdown from 'react-dropdown'
 import KanbanCard from '../components/KanbanCard'
+import Modal from '../components/Modal'
 
 export default function Main () {
   const mock = [
@@ -159,6 +160,17 @@ export default function Main () {
             />)
           }
       </div>
+
+      <Modal>
+          <div className='invoice__header'>
+            <div className='invoice__title'>
+              № ГП363259
+            </div>
+            <div className='invoice__status'>
+              № ГП363259
+            </div>
+          </div>
+      </Modal>
     </div>
   )
 }
