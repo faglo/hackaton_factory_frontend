@@ -4,13 +4,7 @@ import KanbanCard from './KanbanCard'
 import { DndContext } from '@dnd-kit/core'
 
 export default function KanbanTable () {
-  const handleDragEnd = (event) => {
-    const { active, over } = event
-    if (active.id !== over.id) {
-      console.log('Dragged', active.id, 'over', over.id)
-    }
-  }
-  const mockDataCards = [
+  const mock = [
     {
       id: 1,
       name: 'Балки. Тендер №12',
@@ -19,7 +13,8 @@ export default function KanbanTable () {
       price: '520 тыс.',
       date: '21.04',
       stars: 2,
-      pricePerUnit: '1000'
+      pricePerUnit: '1000',
+      columnID: 1
     },
     {
       id: 2,
@@ -29,7 +24,8 @@ export default function KanbanTable () {
       price: '520 тыс.',
       date: '21.04',
       stars: 2,
-      pricePerUnit: '1000'
+      pricePerUnit: '1000',
+      columnID: 1
     },
     {
       id: 3,
@@ -39,7 +35,8 @@ export default function KanbanTable () {
       price: '520 тыс.',
       date: '21.04',
       stars: 2,
-      pricePerUnit: '1000'
+      pricePerUnit: '1000',
+      columnID: 2
     },
     {
       id: 4,
@@ -49,36 +46,54 @@ export default function KanbanTable () {
       price: '520 тыс.',
       date: '21.04',
       stars: 2,
-      pricePerUnit: '1000'
-    },
-    {
-      id: 5,
-      name: 'Балки. Тендер №12',
-      company: 'ООО “Дорстрой”',
-      did: '12344567',
-      price: '520 тыс.',
-      date: '21.04',
-      stars: 2,
-      pricePerUnit: '1000'
+      pricePerUnit: '1000',
+      columnID: 3
     }
   ]
+  const [mockDataCards, setMockDataCards] = React.useState(mock)
   const mockDataCols = [
     {
+      id: 1,
       name: 'На согласовании',
       count: 4,
       color: '#7B61FF'
     },
     {
+      id: 2,
       name: 'Согласован',
       count: 4,
       color: '#4CE465'
     },
     {
+      id: 3,
       name: 'Аннулирован',
       count: 4,
       color: '#EB4335'
     }
   ]
+
+  const handleDragEnd = (result) => {
+    const { active, over } = result
+    console.log(active, over)
+    if (!over) {
+      console.log('no over')
+      return
+    }
+    const cardInfo = mockDataCards.find((deal) => deal.id === parseInt(active.id, 10))
+    const { oldStatusID, newStatusID } = { oldStatusID: cardInfo.status, newStatusID: parseInt(over.id, 10) }
+
+    if (oldStatusID === newStatusID) { return }
+    const nextDeals = mockDataCards.map(d => {
+      if (d !== cardInfo) {
+        return d
+      }
+      return {
+        ...d,
+        columnID: newStatusID
+      }
+    })
+    setMockDataCards(nextDeals)
+  }
   return (
     <div style={{
       display: 'flex',
@@ -89,16 +104,16 @@ export default function KanbanTable () {
         {
           mockDataCols.map((item, index) =>
             <KanbanColumn
-              id={`droppable${index}`}
+              id={item.id}
               name={item.name}
               count={item.count}
               color={item.color}
               key={index}
             >
               {
-                mockDataCards.map((card, index) =>
+                mockDataCards.filter((val) => val.columnID === item.id).map((card, index) =>
                   <KanbanCard
-                    id={`draggable${index}`}
+                    id={card.id}
                     name={card.name}
                     company={card.company}
                     did={card.did}
