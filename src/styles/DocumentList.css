@@ -1,0 +1,47 @@
+.document__container {
+    display: flex;
+    width: 700px;
+    height: 980px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.document__list__container {
+    background: #FFFFFF;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.document__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    margin: 20px 0;
+}
+
+.document__marker__container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 260px;
+    width: 78px;
+    height: 78px;
+    z-index: 1;
+}
+.document__marker_btn{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background: #FFFFFF;
+    border: none;
+}

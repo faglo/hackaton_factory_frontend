@@ -1,9 +1,10 @@
 import React from 'react'
+import DocumentList from "../components/DocumentList.jsx";
 
-export default function Documents () {
-  return (
-    <div>
-      <div>ad</div>
-    </div>
-  )
+export default function Documents() {
+    return (
+        <>
+            <DocumentList/>
+        </>
+    )
 }
