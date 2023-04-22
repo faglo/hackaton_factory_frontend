@@ -7,4 +7,4 @@ WORKDIR /app
 RUN yarn install --frozen-lockfile --non-interactive --link-duplicates
 RUN yarn build
 
-CMD ["npx", "servor", "dist", "index.html", "5001"]
+CMD ["npx", "servor", "dist", "index.html", "5005"]
