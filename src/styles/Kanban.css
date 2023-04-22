@@ -1,0 +1,42 @@
+.kc__header__container {
+  background: #FFFFFF;
+  border-radius: 20px;
+  width: 378px;
+  padding: 10px 20px;
+  height: 77px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.kc__header__text__header {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  /* identical to box height */
+
+  letter-spacing: 0.01em;
+
+  color: #000000;
+  padding-bottom: 4px;
+}
+
+.kc__header__text__subheader {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  /* identical to box height */
+
+  letter-spacing: 0.01em;
+
+  color: #858585;
+}
+
+.cka__container {
+  width: 418px;
+  height: 251px;
+
+  background: #FFFFFF;
+  border-radius: 20px;
+}

@@ -1,0 +1,65 @@
+.filepicker__container {
+  background: #FFFFFF;
+  box-shadow: 2px 2px 36px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 40px;
+  display: flex;
+  padding: 15px 20px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filepicker__add {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 63px;
+  gap: 10px;
+  border: 2px solid #E2E3EB;
+  border-radius: 28px;
+}
+
+.filepicker__add__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.filepicker__add__text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  /* or 16px */
+
+
+  color: #9C9C9C;
+  width: 260px;
+}
+
+.filepicker__add__btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 28px;
+  gap: 5px;
+
+  background: #5131E5;
+  box-shadow: 0px 4px 12px rgba(74, 58, 255, 0.26);
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 11px;
+  width: 400px;
+  /* or 57% */
+
+  text-align: center;
+
+  /* Neutral/100 */
+
+  color: #FFFFFF;
+  cursor: pointer;
+}

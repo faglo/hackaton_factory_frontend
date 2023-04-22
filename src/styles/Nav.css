@@ -1,0 +1,5 @@
+.main {
+  margin-left: 360px;
+  position: fixed;
+  width: calc(90% - 330px);
+}
