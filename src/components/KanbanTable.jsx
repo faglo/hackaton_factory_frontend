@@ -122,6 +122,7 @@ export default function KanbanTable () {
                     stars={card.stars}
                     pricePerUnit={card.pricePerUnit}
                     key={index}
+                    colID={card.columnID}
                   />
                 )
               }

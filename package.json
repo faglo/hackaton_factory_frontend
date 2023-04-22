@@ -36,6 +36,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.9",
+    "react-dropdown": "^1.11.0",
     "react-glider": "^4.0.2",
     "react-hook-form": "^7.43.3",
     "react-redux": "^8.0.5",

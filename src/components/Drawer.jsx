@@ -22,6 +22,11 @@ export default function Drawer () {
   const navigateTo = useNavigate()
   const menuElems = [
     {
+      name: 'Главная',
+      icon: 'main',
+      path: '/'
+    },
+    {
       name: 'Документы',
       icon: 'apps',
       path: '/kanban'

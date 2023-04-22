@@ -5,6 +5,7 @@ import Nav from './components/Nav'
 import { Route, Routes } from 'react-router'
 import Kanban from './screens/Kanban'
 import Documents from './screens/Documents'
+import Main from './screens/Main'
 
 export default function App () {
   return (
@@ -13,6 +14,7 @@ export default function App () {
         <Routes>
             <Route element={<Kanban />} path="/kanban" />
             <Route element={<Documents/>} path="/settings" />
+            <Route element={<Main/>} path="/" />
           </Routes>
       </Nav>
     </div>

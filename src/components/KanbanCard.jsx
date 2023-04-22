@@ -13,7 +13,9 @@ export default function KanbanCard ({
   name,
   pricePerUnit,
   price,
-  btnName = 'Взять в работу'
+  btnName = 'Взять в работу',
+  colID,
+  minified = false
 }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({ id })
   const style = {
@@ -21,7 +23,10 @@ export default function KanbanCard ({
   }
   return (
     <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <div className='cka__container'>
+      <div className='cka__container' style={{
+        height: (colID === 1 ? '240px' : '218px'),
+        width: (minified ? '278px' : 'auto')
+      }}>
         <div className='cka__header__container'>
           <img className='cka__header__img' src={img2}/>
           <div className='cka__header__text__container'>
@@ -32,10 +37,14 @@ export default function KanbanCard ({
               Договор № {did}
             </div>
           </div>
-          <div className='cka__header__text__container__stars'>
-            <img src={star}/>
-            <img src={star}/>
-          </div>
+          {
+            !minified && (
+              <div className='cka__header__text__container__stars'>
+                <img src={star}/>
+                <img src={star}/>
+              </div>
+            )
+          }
           <div className='cka__header__text__container__date'>
             {date}
           </div>
@@ -49,7 +58,9 @@ export default function KanbanCard ({
             <div className='cka_actions_text'>{pricePerUnit} ₽/шт</div>
             <div className='cka_actions_text'>{price} ₽</div>
           </div>
-          <div className='cka_actions_buttons_container'>
+          <div className='cka_actions_buttons_container' style={{
+            display: (colID === 1 ? 'flex' : 'none')
+          }}>
             <div className='cka_actions_button_reject'>Отклонить</div>
             <div className='cka_actions_button_accept'>{btnName}</div>
           </div>
