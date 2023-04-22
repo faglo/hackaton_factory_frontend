@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  devfront:
+    restart: always
+    build: .
+    ports:
+      - "5001:5001"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fronth.rule=HostRegexp(`hackweb.digital-info-tech.ru`)"
+      - "traefik.http.routers.fronth.priority=1"
+      - "traefik.http.routers.fronth.entrypoints=https"

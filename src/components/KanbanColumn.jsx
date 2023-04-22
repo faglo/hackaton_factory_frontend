@@ -1,19 +1,29 @@
 import React from 'react'
 import '../styles/Kanban.css'
+import { useDroppable } from '@dnd-kit/core'
+
 export default function KanbanColumn ({
-  children
+  children,
+  name,
+  count,
+  color,
+  id
 }) {
+  const { isOver, setNodeRef } = useDroppable({ id })
+  const style = {
+    opacity: isOver ? 1 : 0.5
+  }
   return (
-    <div>
+    <div ref={setNodeRef} style={style}>
       <div className='kc__header__container'>
         <div className='kc__header__text__header'>
-          На согласовании
+          {name}
         </div>
         <div className='kc__header__text__subheader'>
-          4 документа
+          {count} документа
         </div>
         <div style={{
-          border: '3px solid #7B61FF',
+          border: `3px solid ${color}`,
           borderRadius: '200px'
         }}>
         </div>
