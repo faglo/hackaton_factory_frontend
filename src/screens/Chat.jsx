@@ -3,6 +3,8 @@ import '../styles/Chat.css'
 import roadmap from '../assets/images/roadmap.svg'
 import { useNavigate } from 'react-router-dom'
 import img from '../assets/images/imgh.png'
+import att from '../assets/attachment.svg'
+import send from '../assets/icons/send.svg'
 
 function Message ({
   avatar,
@@ -22,7 +24,6 @@ function Message ({
 }
 
 function ChatPart () {
-  const navigate = useNavigate()
   const [text, setText] = React.useState('')
   const [messages, setMessages] = React.useState([
     {
@@ -67,9 +68,7 @@ function ChatPart () {
       </div>
       <div className="chat__input">
         <div className="chat__input__container">
-          <img src={
-            ''
-          } alt="attachment" className="att__icon" />
+          <img src={att} alt="attachment" className="att__icon" />
           <input type="text" className="chat__input__text"
           placeholder="Напишите сообщение..."
           value={text}
@@ -107,9 +106,7 @@ function ChatPart () {
             }, 100)
           }}
         >
-          <img src={
-            ''
-          } alt="send" />
+          <img src={send} alt="send" />
         </div>
       </div>
     </div>
