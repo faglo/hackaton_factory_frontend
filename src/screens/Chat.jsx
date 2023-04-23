@@ -1,10 +1,10 @@
 import React from 'react'
 import '../styles/Chat.css'
 import roadmap from '../assets/images/roadmap.svg'
-import { useNavigate } from 'react-router-dom'
 import img from '../assets/images/imgh.png'
-import att from '../assets/attachment.svg'
+import att from '../assets/icons/attachment.svg'
 import send from '../assets/icons/send.svg'
+import img2 from '../assets/images/img2.png'
 
 function Message ({
   avatar,
@@ -48,11 +48,32 @@ function ChatPart () {
       avatar: img
     }
   ])
+
+  const sendMessage = (e) => {
+    if (e.key === 'Enter') {
+      if (!text) return
+      setMessages([...messages, {
+        id: messages.length + 1,
+        text,
+        date: `${new Date().getHours()}:${new Date().getMinutes()}`,
+        isMy: true,
+        avatar: img2
+      }])
+      setText('')
+      // scroll after 0.5s
+      setTimeout(() => {
+        window.scrollTo(0, document.body.scrollHeight)
+      }, 100)
+    }
+  }
   return (
-    <div className="screen" style={{
+    <div style={{
       backgroundColor: 'white',
-      height: '100vh',
-      marginBlock: 0
+      height: '780px',
+      borderRadius: '20px',
+      padding: '20px',
+      display: 'flex',
+      flexDirection: 'column'
     }}>
       <div className="chat__header">
         <div className="chat__header__title">Чат</div>
@@ -73,22 +94,7 @@ function ChatPart () {
           placeholder="Напишите сообщение..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              if (!text) return
-              setMessages([...messages, {
-                id: messages.length + 1,
-                text,
-                date: `${new Date().getHours()}:${new Date().getMinutes()}`,
-                isMy: true
-              }])
-              setText('')
-              // scroll after 0.5s
-              setTimeout(() => {
-                window.scrollTo(0, document.body.scrollHeight)
-              }, 100)
-            }
-          }}
+          onKeyDown={sendMessage}
         />
         </div>
         <div className="chat__input__send"
@@ -118,29 +124,40 @@ export default function Chat () {
   return (
     <div>
       <div className='chat__container__main'>
-        <div className='chat__container__overall'>
-          <div className='chat__container__header'>
-            Консоль, Ограничитель консоли, Опора двусторонняя СТ-062, Стойка вертикальная опорная (балка), лот 147.
-          </div>
-          <div className='chat__container__card'>
-            <div className='chat__container__card__top'>
-              <div className='chat__container__card__first'>
-                Входящий договор №111 от 22.04.23
+        {
+          histOpened && (
+            <div className='chat__container__overall'>
+              <div className='chat__container__header'>
+                Консоль, Ограничитель консоли, Опора двусторонняя СТ-062, Стойка вертикальная опорная (балка), лот 147.
               </div>
-              <div className='chat__container__card__second'>
-                46 867, 78 <div className='chat__container__card__first'>₽</div>
+              <div className='chat__container__card'>
+                <div className='chat__container__card__top'>
+                  <div className='chat__container__card__first'>
+                    Входящий договор №111 от 22.04.23
+                  </div>
+                  <div className='chat__container__card__second'>
+                    46 867, 78 <div className='chat__container__card__first'>₽</div>
+                  </div>
+                </div>
+                <div className='chat__container__card__btm'>
+                купли-продажи
+                </div>
+              </div>
+              <img className='chat__container__roadmap' src={roadmap} />
+              <div className='chat__container__btn' onClick={() => setHistOpened(false)}>
+              Скрыть историю
               </div>
             </div>
-            <div className='chat__container__card__btm'>
-            купли-продажи
-            </div>
-          </div>
-          <img className='chat__container__roadmap' src={roadmap} />
-          <div className='chat__container__btn'>
-          Скрыть историю
-          </div>
-        </div>
+          )
+        }
         <div>
+        {
+          !histOpened && (
+            <div onClick={() => setHistOpened(true)} className='chat__container__btn' id='big'>
+              Показать историю
+            </div>
+          )
+        }
         <ChatPart/>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import KanbanColumn from './KanbanColumn'
 import KanbanCard from './KanbanCard'
 import { DndContext } from '@dnd-kit/core'
-import { getColumnsByFunnelId, getTasksByColumnId } from '../../API/kanban.js'
+import { getColumnsByFunnelId, getTasksByColumnId, moveTask } from '../../API/kanban.js'
 import dayjs from 'dayjs'
 
 export default function KanbanTable () {
@@ -44,7 +44,9 @@ export default function KanbanTable () {
         column_id: newStatusID
       }
     })
-    setMockDataCards(nextDeals)
+    moveTask(cardInfo.id, newStatusID).then(
+      setMockDataCards(nextDeals)
+    )
   }
 
   if (!mockDataCols) {

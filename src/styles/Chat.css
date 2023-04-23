@@ -1,6 +1,10 @@
 .chat__container__main {
-  display: grid;
-  grid-template: 1fr / 1fr 1fr;
+  display: flex;
+  gap: 24px;
+  height: 100%;
+  padding: 18px;
+  align-content: center;
+  justify-content: center;
 }
 
 .chat__container__overall {
@@ -135,7 +139,7 @@
 }
 
 .mine {
-  background: rgba(66, 133, 244, 0.6);
+  background: #7B61FF;
   color: #FFFFFF;
 }
 
@@ -169,9 +173,9 @@
   padding: 8px;
   align-items: center;
   justify-content: stretch;
-  position: fixed;
   bottom: 24px;
   width: 95%;
+  margin-top: auto;
 }
 
 .att__icon {
@@ -181,7 +185,7 @@
 }
 
 .chat__input__send {
-  background: #4CE465;
+  background: #7B61FF;
   border-radius: 10px;
   padding: 14px;
   display: flex;
@@ -191,12 +195,20 @@
 }
 
 .chat__header {
-  position: fixed;
   background: white;
 }
 
 .chat__messages {
-  padding-top: 64px;
   background: white;
-  padding-bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#big {
+  width: 90%;
+  height: 25px;
+  margin-bottom: 15px;
 }
