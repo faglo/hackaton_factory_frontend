@@ -1,135 +1,86 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import KanbanColumn from './KanbanColumn'
 import KanbanCard from './KanbanCard'
-import { DndContext } from '@dnd-kit/core'
+import {DndContext} from '@dnd-kit/core'
+import {getColumnsByFunnelId, getTasksByColumnId} from '../../API/kanban.js'
 
-export default function KanbanTable () {
-  const mock = [
-    {
-      id: 1,
-      name: 'Балки. Тендер №12',
-      company: 'ООО “Дорстрой”',
-      did: '12344567',
-      price: '520 тыс.',
-      date: '21.04',
-      stars: 2,
-      pricePerUnit: '1000',
-      columnID: 1
-    },
-    {
-      id: 2,
-      name: 'Балки. Тендер №12',
-      company: 'ООО “Дорстрой”',
-      did: '12344567',
-      price: '520 тыс.',
-      date: '21.04',
-      stars: 2,
-      pricePerUnit: '1000',
-      columnID: 1
-    },
-    {
-      id: 3,
-      name: 'Балки. Тендер №12',
-      company: 'ООО “Дорстрой”',
-      did: '12344567',
-      price: '520 тыс.',
-      date: '21.04',
-      stars: 2,
-      pricePerUnit: '1000',
-      columnID: 2
-    },
-    {
-      id: 4,
-      name: 'Балки. Тендер №12',
-      company: 'ООО “Дорстрой”',
-      did: '12344567',
-      price: '520 тыс.',
-      date: '21.04',
-      stars: 2,
-      pricePerUnit: '1000',
-      columnID: 3
-    }
-  ]
-  const [mockDataCards, setMockDataCards] = React.useState(mock)
-  const mockDataCols = [
-    {
-      id: 1,
-      name: 'На согласовании',
-      count: 4,
-      color: '#7B61FF'
-    },
-    {
-      id: 2,
-      name: 'Согласован',
-      count: 4,
-      color: '#4CE465'
-    },
-    {
-      id: 3,
-      name: 'Аннулирован',
-      count: 4,
-      color: '#EB4335'
-    }
-  ]
+export default function KanbanTable() {
 
-  const handleDragEnd = (result) => {
-    const { active, over } = result
-    console.log(active, over)
-    if (!over) {
-      console.log('no over')
-      return
-    }
-    const cardInfo = mockDataCards.find((deal) => deal.id === parseInt(active.id, 10))
-    const { oldStatusID, newStatusID } = { oldStatusID: cardInfo.status, newStatusID: parseInt(over.id, 10) }
+    const [mockDataCols, setMockDataCols] = React.useState({})
+    const [mockDataCards, setMockDataCards] = React.useState({})
 
-    if (oldStatusID === newStatusID) { return }
-    const nextDeals = mockDataCards.map(d => {
-      if (d !== cardInfo) {
-        return d
-      }
-      return {
-        ...d,
-        columnID: newStatusID
-      }
-    })
-    setMockDataCards(nextDeals)
-  }
-  return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'row',
-      gap: '20px'
-    }}>
-      <DndContext onDragEnd={handleDragEnd}>
-        {
-          mockDataCols.map((item, index) =>
-            <KanbanColumn
-              id={item.id}
-              name={item.name}
-              count={item.count}
-              color={item.color}
-              key={index}
-            >
-              {
-                mockDataCards.filter((val) => val.columnID === item.id).map((card, index) =>
-                  <KanbanCard
-                    id={card.id}
-                    name={card.name}
-                    company={card.company}
-                    did={card.did}
-                    price={card.price}
-                    date={card.date}
-                    stars={card.stars}
-                    pricePerUnit={card.pricePerUnit}
-                    key={index}
-                    colID={card.columnID}
-                  />
-                )
-              }
-            </KanbanColumn>
-          )
+    useEffect((id) => {
+        const columns = getColumnsByFunnelId(id)
+        console.log(columns)
+        // TODO Change colors
+        columns.map((item) => {item.color = '#7B61FF'})
+        setMockDataCols(columns)
+        columns.map((item) => {
+            const cards = getTasksByColumnId(item.id)
+            setMockDataCards([...mockDataCards, ...cards])
+        })
+    }, [])
+
+    const handleDragEnd = (result) => {
+        const {active, over} = result
+        console.log(active, over)
+        if (!over) {
+            console.log('no over')
+            return
         }
-      </DndContext>
-    </div>
-  )
+        const cardInfo = mockDataCards.find((deal) => deal.id === parseInt(active.id, 10))
+        const {oldStatusID, newStatusID} = {oldStatusID: cardInfo.status, newStatusID: parseInt(over.id, 10)}
+
+        if (oldStatusID === newStatusID) {
+            return
+        }
+        const nextDeals = mockDataCards.map(d => {
+            if (d !== cardInfo) {
+                return d
+            }
+            return {
+                ...d,
+                columnID: newStatusID
+            }
+        })
+        setMockDataCards(nextDeals)
+    }
+    return (
+        <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '20px'
+        }}>
+            <DndContext onDragEnd={handleDragEnd}>
+                {
+                    mockDataCols.map((item, index) =>
+                        <KanbanColumn
+                            id={item.id}
+                            name={item.title}
+                            count={item.count}
+                            color={item.color}
+                            key={index}
+                        >
+                            {
+                                mockDataCards.filter((val) => val.columnID === item.id).map((card, index) =>
+                                    <KanbanCard
+                                        id={card.id}
+                                        name={card.title}
+                                        company={card.company}
+                                        did={card.did}
+                                        price={card.price}
+                                        date={card.date}
+                                        stars={card.stars}
+                                        pricePerUnit={card.price_per_unit}
+                                        key={index}
+                                        colID={card.column_id}
+                                    />
+                                )
+                            }
+                        </KanbanColumn>
+                    )
+                }
+            </DndContext>
+        </div>
+    )
 }
