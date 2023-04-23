@@ -4,7 +4,12 @@ import dropdown from '../assets/icons/dropdown.svg'
 import Dropdown from 'react-dropdown'
 import KanbanCard from '../components/KanbanCard'
 import Modal from '../components/Modal'
-
+import mdiChat from '../assets/icons/mdi-chat.svg'
+import printIcon from '../assets/icons/print.svg'
+import img3 from '../assets/images/img3.png'
+import img2 from '../assets/images/img2.png'
+import excelIcon from '../assets/icons/excel.svg'
+import wordIcon from '../assets/icons/word.svg'
 export default function Main () {
   const mock = [
     {
@@ -50,6 +55,24 @@ export default function Main () {
       stars: 2,
       pricePerUnit: '1000',
       columnID: 3
+    }
+  ]
+  const tableData = [
+    {
+      name: 'Описание секции',
+      desc: 'Закупки корпоративных заказчиков'
+    },
+    {
+      name: 'Номер извещения',
+      desc: 'ГП363259'
+    },
+    {
+      name: 'Номер закупки',
+      desc: 'Консоль, Ограничитель консоли, Опора двусторонняя СТ-062, Стойка вертикальная опорная (балка), лот 147.'
+    },
+    {
+      name: 'Наименование закупки',
+      desc: 'Консоль, Ограничитель консоли, Опора двусторонняя СТ-062, Стойка вертикальная опорная (балка), лот 147.'
     }
   ]
   return (
@@ -167,7 +190,62 @@ export default function Main () {
               № ГП363259
             </div>
             <div className='invoice__status'>
-              № ГП363259
+              Подача заявок
+            </div>
+            <div className='invoice__status__second'>
+              Торги без ЭП
+            </div>
+
+            <div className='invoice__chat__btn'>
+              <span className='invoice__chat__btn__span'>
+                чат
+              </span>
+              <img src={mdiChat} />
+            </div>
+            <img src={printIcon} />
+          </div>
+          <div className='invoice__body__container'>
+            <img className='invoice__body__userpic' src={img2}/>
+            <img className='cka__body__img' src={img3}/>
+            <span className='invoice__body__desc'>
+              Консоль, Ограничитель консоли, Опора двусторонняя СТ-062, Стойка вертикальная опорная (балка), лот 147.
+            </span>
+          </div>
+          <div className='invoice__table__container'>
+            {
+              tableData.map((item, idx) =>
+              <div className='invoice__table__row' key={idx}>
+                <div className='invoice__table__row__name'>
+                  {item.name}
+                </div>
+                <div className='invoice__table__row__desc'>
+                  {item.desc}
+                </div>
+              </div>)
+            }
+          </div>
+          <div className='invoice__processing'>
+            <div className='invoice__processing__title'>
+              Документация процедуры
+            </div>
+            <div className='invoice__processing__items'>
+              <div className='invoice__processing__item'>
+                <img src={wordIcon} />
+                <span className='invoice__processing__item__name'>
+                Извещение.doc
+                </span>
+              </div>
+              <div className='invoice__processing__item'>
+                <img src={excelIcon} />
+                <span className='invoice__processing__item__name'>
+                ТЗ.xlsx
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className='invoice__fields__container'>
+            <div className='invoice__processing__title'>
+              Заполните
             </div>
           </div>
       </Modal>
