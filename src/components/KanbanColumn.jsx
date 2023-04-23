@@ -12,7 +12,9 @@ export default function KanbanColumn ({
   const { isOver, setNodeRef } = useDroppable({ id })
   const style = {
     backgroundColor: !isOver ? 'transparent' : '#fafafa',
-    transotion: 'all 1s ease'
+    transotion: 'all 1s ease',
+    marginTop: '40px',
+    borderRadius: '20px',
   }
   return (
     <div ref={setNodeRef} style={style}>
