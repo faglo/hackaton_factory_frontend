@@ -143,19 +143,20 @@ export default function Main () {
       <div className='main__content'>
           {
             mock.map((item) =>
-            <KanbanCard
-              key={item.id}
-              name={item.name}
-              company={item.company}
-              did={item.did}
-              price={item.price}
-              date={item.date}
-              stars={item.stars}
-              pricePerUnit={item.pricePerUnit}
-              colID={1}
-              minified
-              btnName='Рассмотреть'
-            />)
+              <KanbanCard
+                key={item.id}
+                name={item.name}
+                company={item.company}
+                did={item.did}
+                price={item.price}
+                date={item.date}
+                stars={item.stars}
+                pricePerUnit={item.pricePerUnit}
+                colID={1}
+                minified
+                btnName='Рассмотреть'
+              />
+            )
           }
       </div>
     </div>

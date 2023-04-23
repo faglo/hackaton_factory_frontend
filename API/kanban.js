@@ -33,6 +33,6 @@ export const getColumnsByFunnelId = (id) => API
   .catch(handleErr)
 
 export const getTasksByColumnId = (id) => API
-  .get(`${prefix}//columns/${id}/tasks`)
+  .get(`${prefix}/columns/${id}/tasks`)
   .then(handleResp)
   .catch(handleErr)

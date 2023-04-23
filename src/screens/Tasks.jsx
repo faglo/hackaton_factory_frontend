@@ -7,8 +7,10 @@ import img3 from '../assets/images/img3.png'
 import img2 from '../assets/images/img2.png'
 import excelIcon from '../assets/icons/excel.svg'
 import wordIcon from '../assets/icons/word.svg'
+import { useNavigate } from 'react-router'
 
 export default function Tasks () {
+  const navigateTo = useNavigate()
   const cats = ['новые', 'в работе', 'доп. проверка', 'на согласовании', 'готово']
   const [active, setActive] = React.useState('новые')
   const [modalOpened, setModalOpened] = React.useState(false)
@@ -123,13 +125,19 @@ export default function Tasks () {
               Торги без ЭП
             </div>
 
-            <div className='invoice__chat__btn'>
+            <div className='invoice__chat__btn' onClick={
+                () => navigateTo('/chat/1')
+            }>
               <span className='invoice__chat__btn__span'>
                 чат
               </span>
               <img src={mdiChat} />
             </div>
-            <img src={printIcon} />
+            <img src={printIcon} style={{
+              cursor: 'pointer'
+            }}
+            onClick={() => window.print()}
+            />
           </div>
           <div className='invoice__body__container'>
             <img className='invoice__body__userpic' src={img2}/>
