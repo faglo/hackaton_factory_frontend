@@ -15,17 +15,19 @@ export default function KanbanCard ({
   price,
   btnName = 'Взять в работу',
   colID,
-  minified = false
+  minified = false,
+  onClick = undefined
 }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({ id })
   const style = {
     transform: CSS.Translate.toString(transform)
   }
   return (
-    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes} onClick={onClick}>
       <div className='cka__container' style={{
-        height: (colID === 1 ? '240px' : '218px'),
-        width: (minified ? '278px' : 'auto')
+        height: (colID === 1 ? '240px' : '200px'),
+        width: (minified ? '278px' : 'auto'),
+        cursor: (onClick ? 'pointer' : 'default')
       }}>
         <div className='cka__header__container'>
           <img className='cka__header__img' src={img2}/>
