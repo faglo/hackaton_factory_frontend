@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import KanbanColumn from './KanbanColumn'
 import KanbanCard from './KanbanCard'
 import {DndContext} from '@dnd-kit/core'
-import {getColumnsByFunnelId, getTasksByColumnId} from '../../API/kanban.js'
+import {getColumnsByFunnelId, getTasksByColumnId, moveTask} from '../../API/kanban.js'
 
 export default function KanbanTable() {
 
@@ -13,7 +13,9 @@ export default function KanbanTable() {
         const columns = getColumnsByFunnelId(id)
         console.log(columns)
         // TODO Change colors
-        columns.map((item) => {item.color = '#7B61FF'})
+        columns.map((item) => {
+            item.color = '#7B61FF'
+        })
         setMockDataCols(columns)
         columns.map((item) => {
             const cards = getTasksByColumnId(item.id)
