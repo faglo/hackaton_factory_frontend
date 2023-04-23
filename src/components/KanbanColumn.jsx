@@ -14,7 +14,7 @@ export default function KanbanColumn ({
     backgroundColor: !isOver ? 'transparent' : '#fafafa',
     transotion: 'all 1s ease',
     marginTop: '40px',
-    borderRadius: '20px',
+    borderRadius: '20px'
   }
   return (
     <div ref={setNodeRef} style={style}>
@@ -23,7 +23,7 @@ export default function KanbanColumn ({
           {name}
         </div>
         <div className='kc__header__text__subheader'>
-          {count} документа
+          {count} документ(а,ов)
         </div>
         <div style={{
           border: `3px solid ${color}`,

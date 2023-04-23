@@ -2,8 +2,8 @@ import React from 'react'
 import '../styles/DocumentList.css'
 import marker from '../assets/icons/marker.svg'
 
-export default function DocumentList() {
-    return (
+export default function DocumentList () {
+  return (
         <div>
             <div className="document__marker__container">
                 <button className="document__marker_btn">
@@ -19,5 +19,5 @@ export default function DocumentList() {
             </div>
 
         </div>
-    )
+  )
 }
